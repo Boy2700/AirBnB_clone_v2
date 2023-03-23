@@ -3,7 +3,7 @@
 
 The application listens on 0.0.0.0, port 5000.
 Routes:
-    /hbnb_filters: HBnB HTML filters page.
+    /states_list: HTML page with a list of all State objects in DBStorage.
 """
 from models import storage
 from flask import Flask
@@ -12,13 +12,14 @@ from flask import render_template
 app = Flask(__name__)
 
 
-@app.route("/hbnb_filters", strict_slashes=False)
-def hbnb_filters():
-    """Displays the main HBnB filters HTML page."""
+@app.route("/states_list", strict_slashes=False)
+def states_list():
+    """Displays an HTML page with a list of all State objects in DBStorage.
+
+    States are sorted by name.
+    """
     states = storage.all("State")
-    amenities = storage.all("Amenity")
-    return render_template("10-hbnb_filters.html",
-                           states=states, amenities=amenities)
+    return render_template("7-states_list.html", states=states)
 
 
 @app.teardown_appcontext
